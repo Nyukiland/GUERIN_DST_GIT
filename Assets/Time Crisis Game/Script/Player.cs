@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
     public UnityEvent EventOutOfAmmo;
     public UnityEvent EventShoot;
     public UnityEvent EventHitTaken;
+    public UnityEvent EventLifeOut;
 
     public GameObject bulletPrefab;
     public int maxAmmo = 10;
@@ -30,7 +31,10 @@ public class Player : MonoBehaviour
         currentLife = startLife;
     }
 
-
+    private void Update()
+    {
+        if (currentLife <= 0) EventLifeOut?.Invoke();
+    }
     public void TakeHit()
     {
         currentLife--;
